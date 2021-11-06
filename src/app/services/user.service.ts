@@ -12,7 +12,14 @@ export class UserService {
   constructor( private http: HttpClient ) { }
 
   getUsers() {
-    return this.http.get(`${this.URL}/users?per_page=6`)
+    return this.http.get(`${this.URL}/users?per_page=6&&delay=3`)
+      .pipe(
+        map( (response: any) => response.data )
+      );
+  }
+
+  getUserById(id: string) {
+    return this.http.get(`${this.URL}/users/${ id }`)
       .pipe(
         map( (response: any) => response.data )
       );
